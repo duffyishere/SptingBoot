@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public class MemoRepositoryTests {
     @Transactional
     public void testSelectById(){
 
-        Long mno = 100L;
+        Long mno = 1L;
 
         Optional<Memo> memo = memoRepository.findById(mno);
 
@@ -99,5 +100,33 @@ public class MemoRepositoryTests {
         result.forEach(System.out::println);
     }
 
+    @Test
+    public void testSort01(){
 
+        Sort sort = Sort.by("mno").descending();
+
+        Pageable pageable = PageRequest.of(0, 10, sort);
+
+        Page<Memo> results = memoRepository.findAll(pageable);
+
+        results.get().forEach( memo -> {
+            System.out.println(memo);
+        });
+    }
+
+    @Test
+    public void testSort02(){
+
+        Sort sort1 = Sort.by("mno").descending();
+        Sort sort2 = Sort.by("memoText").ascending();
+        Sort sortAll = sort1.and(sort2);
+
+        Pageable pageable = PageRequest.of(0, 10, sortAll);
+
+        Page<Memo> results = memoRepository.findAll(pageable);
+
+        results.get().forEach( memo -> {
+            System.out.println(memo);
+        });
+    }
 }
