@@ -39,7 +39,7 @@ public class SampleController {
         model.addAttribute("list", list);
     }
 
-    @GetMapping("exInline")
+    @GetMapping("/exInline")
     public String exInline(RedirectAttributes redirectAttributes){
 
         log.info("exInline........");
@@ -60,5 +60,11 @@ public class SampleController {
     public void ex03(){
 
         log.info("ex03........");
+    }
+
+    @GetMapping("/exLayout01")
+    public void exLayout01(){
+
+        log.info("layout01...........");
     }
 }
