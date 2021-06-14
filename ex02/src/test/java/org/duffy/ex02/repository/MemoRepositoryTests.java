@@ -150,5 +150,5 @@ public class MemoRepositoryTests {
 
         memoRepository.deleteMemoByMnoLessThan(10L);
     }
-    
+
 }
